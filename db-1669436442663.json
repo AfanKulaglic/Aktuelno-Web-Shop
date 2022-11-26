@@ -1,0 +1,40 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "name": "PAMETNI SAT D20 Smart watch *Akcija* NOVO",
+      "quantity": 2,
+      "category": "satovi",
+      "count": true,
+      "brand": "D20",
+      "rating": "4.8",
+      "ID": "2973781",
+      "image": "https://s9.pik.ba/galerija/2022-06/13/11/slika-488115-62a7a84326f2a-velika.jpg",
+      "image1": "https://s9.pik.ba/galerija/2022-03/21/10/slika-488115-6238ec2aa8c2e-velika.jpg",
+      "image2": "https://s9.pik.ba/galerija/2022-03/21/10/slika-488115-6238ec2bb3779-velika.jpg",
+      "image3": "https://s9.pik.ba/galerija/2022-03/21/10/slika-488115-6238ec2bb3779-velika.jpg",
+      "href": "Articles/",
+      "specification": "Kompatibilni OS: Android i OS 8.0 ili noviji //n Način rada: Tipka s jednim dodirom //n Vodootporan: IP67 //n Veličina ekrana: 1,44 inča TFT //n Rezolucija: 128*128 piksela //n Kapacitet baterije: 100 mAh //n Vrijeme korištenja: oko 5-10 Dana //n Vrsta punjenja: USB punjenje //n  Paket uključuje: //n 1 x pametni sat //n 1 x priručnik //n Sigurno pakiranje u maloprodajnu kutiju.",
+      "description": "Bijela boja! \\n 20 Pro pametni sat Y68 Bluetooth fitness tracker, Sportski sat Monitor otkucaja srca , krvni tlak za Android i IOS \\n Funkcije \\n Nova metoda punjenja narukvice, odvojivi dizajn narukvice s brzim otpuštanjem, može se puniti uključivanjem USB sučelja, eliminirajući problem nošenja kabela za punjenje i postolja za punjenje.",
+      "price": "30 Km"
+    },
+    {
+      "id": 2,
+      "name": "Zadnja auto kamera Rikverc LED",
+      "quantity": 4,
+      "category": "satovi",
+      "count": true,
+      "brand": "ostalo",
+      "rating": "5.0",
+      "ID": "2973782",
+      "image": "https://s9.pik.ba/galerija/2022-07/11/07/slika-488115-62cc64b545ce8-velika.jpg",
+      "image1": "https://s9.pik.ba/galerija/2022-03/18/09/slika-488115-6234ea7c9cc3f-velika.jpg",
+      "image2": "https://s9.pik.ba/galerija/2022-03/18/09/slika-488115-6234ea872b8ea-velika.jpg",
+      "image3": "https://s9.pik.ba/galerija/2022-03/18/09/slika-488115-6234ea8c86a17-velika.jpg",
+      "href": "Articles/",
+      "specification": "Učinkoviti piksel: 728*500 \\n TV sustav: NTSC \\n Kut leće: 170 stupnjeva \\n Vodootporan: IP68 \\n Napajanje: DC 12V \\n Senzor slike: CMOS \\n Senzor slike: CMOS \\n Balans bijele boje: automatski \\n Duljina kabela: oko 6m",
+      "description": "Bijela boja! \\n 20 Pro pametni sat Y68 Bluetooth fitness tracker, Sportski sat Monitor otkucaja srca , krvni tlak za Android i IOS \\n Funkcije \\n Nova metoda punjenja narukvice, odvojivi dizajn narukvice s brzim otpuštanjem, može se puniti uključivanjem USB sučelja, eliminirajući problem nošenja kabela za punjenje i postolja za punjenje.",
+      "price": "25 Km"
+    }
+  ]
+}
