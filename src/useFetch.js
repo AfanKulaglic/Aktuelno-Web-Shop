@@ -20,7 +20,7 @@ export const useFetch = (url) => {
         setError(false)
         setLoading(err.message)
       })
-    }, 1000);
+    }, 3000);
   },[url])
 
   return{data,loading,error}

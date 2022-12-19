@@ -8,14 +8,12 @@ export const BanerC = () => {
 
   return (
     <div style={{marginTop:'3vh',marginBottom:'3vh'}}>
-        <Container>
             {isMobile &&
                 <img src={banerMobile} width='100%' />
             }
             {!isMobile &&
                 <img src={baner} width='100%'/>
             }
-        </Container>
     </div>
   )
 }

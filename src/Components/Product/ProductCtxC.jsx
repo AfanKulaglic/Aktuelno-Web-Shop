@@ -2,11 +2,10 @@ import React,{useState,useEffect} from 'react'
 import ShareIcon from '@mui/icons-material/Share';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { useFetch } from '../../useFetch'
-import {useParams} from 'react-router-dom'
+import {useLocation, useParams} from 'react-router-dom'
 import Carousel from 'react-gallery-carousel';
 import 'react-gallery-carousel/dist/index.css';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
-
 import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import Rating from '@mui/material/Rating';
@@ -19,29 +18,35 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import EmailIcon from '@mui/icons-material/Email';
 import OlxIcon from '../../Img/OlxIcon.png'
 import InstagramIcon from '../../Img/InstagramIcon.png'
-import { Button } from 'react-bootstrap';
+import { Button, Col, Dropdown, Form, FormLabel, Modal, Row } from 'react-bootstrap';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import { db } from '../../firebase'
+import { uid } from 'uid'
+import { set,ref, onValue,remove, update } from 'firebase/database'
+import { FormControlLabel, Input, Radio, RadioGroup } from '@mui/material';
+import { ModalCtx } from './ModalCtx';
 
 export const ProductCtxC = () => {
+    const[item,setItem] = useState([])
     const isMobile = window.innerWidth <= 500;
 
-    const[item,setItem] = useState(null)
-
     useEffect(() => {
-        fetch('https://mocki.io/v1/f05531ec-ce1d-4f1e-9832-e3aab9fc9c4a')
-        .then(res => {
-            return res.json()
-        })
-        .then(data => {
-            setItem(data)
-        })
+      onValue(ref(db), snapshot => {
+        setItem([])
+        const data = snapshot.val()
+        if(data !== null) {
+          Object.values(data).map((todo) => {
+            setItem(oldArray => [...oldArray,todo])
+          })
+        }
+      })
     },[])
 
-    const{id} = useParams()
-    const Id = parseInt(id,10)
+
+    const{name} = useParams()
 
     //carousel
     const[image,setImage] = useState()
@@ -130,7 +135,7 @@ export const ProductCtxC = () => {
             <>
             {item && item.map(item => 
             <>
-                {item.id === Id &&
+                {item.name === name &&
                 <>
                     <div>
                         <h2>{item.name}</h2>
@@ -172,11 +177,11 @@ export const ProductCtxC = () => {
             <>
             {item && item.map(item => 
             <>
-                {item.id === Id &&
+                {item.name === name &&
                 <>
                     <div style={{display:'flex'}}>
                         <p style={{marginTop:'5px'}}>CIJENA</p>
-                        <h2 style={{marginLeft:'10px',color:'maroon'}}>{item.price}</h2>
+                        <h2 style={{marginLeft:'10px',color:'maroon'}}>{item.price} KM</h2>
                     </div>
                     <div style={{marginTop:isMobile? '0px' : '10px'}}>
                         <FacebookIcon fontSize='large' style={{marginRight:'7px',color:'blue'}}/>
@@ -191,7 +196,6 @@ export const ProductCtxC = () => {
             </>
         )
     }
-
 
     const[quantity,setQuantity] = useState(1)
 
@@ -208,9 +212,33 @@ export const ProductCtxC = () => {
                 </div>
             </>
         )
+    } 
+
+    const [show, setShow] = useState(false);
+    function handleShow() {
+        setShow(true);
     }
 
-      
+    const{ state } = useLocation()
+
+
+    const [fav,setFav] = useState('fav')
+
+    function UpdateCart(item) {        
+        update(ref(db,`/${item.uuid}`), {
+            [fav+item.brojac]:name,
+            brojac:item.brojac+1,
+            uuid:item.uuid
+        })
+        
+        console.log(item)
+    }
+
+    function AddToCart() {
+        {item.filter(item => (item.email === state.email)).map(item => 
+           UpdateCart(item)
+        )}
+    }
 
   return (
     <div style={{display:!isMobile? 'flex' : 'block'}}>
@@ -222,7 +250,7 @@ export const ProductCtxC = () => {
             <div style={{width:isMobile? '100%' : '50%'}}>
                 {item && item.map(item => 
                     <div>                  
-                        {Id === item.id &&
+                        {name === item.name &&
                             <div>
                                 <GetImg image={item.image} image1={item.image1} image2={item.image2} image3={item.image3}/>
                                 <Carousel 
@@ -236,14 +264,17 @@ export const ProductCtxC = () => {
             </div>
             {!isMobile &&
                 <div style={{display:'block',width:'50%'}}>
-                    <div style={{display:'flex',width:'100%',padding:'35px'}}>
+                    <div style={{display:'flex',width:'100%',padding:'35px',paddingTop:'24px'}}>
                         <ProductDetails />
                     </div>
                     <div style={{padding:'35px'}}>
                         <ProductPrice />
                         <Quantity/>
-                        <Button style={{color:'white',marginTop:'3vh',width:'22vh'}} startIcon={<ShoppingBasketIcon />}>
+                        <Button onClick={() => AddToCart()} style={{color:'white',marginTop:'3vh',width:'32vh',padding:'1vh',fontWeight:'700'}} startIcon={<ShoppingBasketIcon />}>
                             DODAJ U KORPU
+                        </Button>
+                        <Button onClick={() => handleShow()} variant='danger' style={{color:'white',marginTop:'3vh',width:'32vh',marginLeft:'1vh',padding:'1vh',fontWeight:'700'}} startIcon={<ShoppingBasketIcon />}>
+                            NARUCI
                         </Button>
                     </div>
                 </div>
@@ -252,10 +283,33 @@ export const ProductCtxC = () => {
                 <div style={{marginTop:'2vh'}}>
                     <ProductPrice />
                     <Quantity />
-                    <Button style={{color:'white',marginTop:'3vh',width:'100%'}} endIcon={<ShoppingBasketIcon />}>
+                    <Button onClick={() => AddToCart()} variant='danger' style={{color:'white',marginTop:'3vh',width:'100%',padding:'1.4vh',fontWeight:'700'}} endIcon={<ShoppingBasketIcon />}>
                         DODAJ U KORPU
                     </Button>
+                    <Button onClick={() => handleShow()} variant='success' style={{color:'white',marginTop:'3vh',width:'100%',padding:'1.4vh',fontWeight:'700'}} endIcon={<ShoppingBasketIcon />}>
+                        NARUCI
+                    </Button>
                 </div>
+            }
+            {isMobile &&
+                <Modal show={show} fullscreen={true} onHide={() => setShow(false)}>
+                    <Modal.Header closeButton>
+                    <Modal.Title></Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <ModalCtx />
+                    </Modal.Body>
+                </Modal>            
+            }
+            {!isMobile &&
+                <Modal show={show} onHide={() => setShow(false)} size="lg">
+                    <Modal.Header closeButton>
+                    <Modal.Title></Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <ModalCtx />
+                    </Modal.Body>
+                </Modal>  
             }
     </div>
   )

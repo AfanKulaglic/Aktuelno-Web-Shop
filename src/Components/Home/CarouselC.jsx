@@ -1,7 +1,12 @@
 import React from 'react'
 import { Nav, NavDropdown } from 'react-bootstrap';
 import Carousel from 'react-bootstrap/Carousel';
+import carouselImg2 from '../../Img/Home/carousel2.jpg'
+import carouselImg1 from '../../Img/Home/carousel1.jpg'
 import carouselImg from '../../Img/Home/carousel.jpg'
+import carouselMobileImg from '../../Img/Home/carouselMobile.jpg'
+import carouselMobileImg1 from '../../Img/Home/carouselMobile1.jpg'
+import carouselMobileImg2 from '../../Img/Home/carouselMobile2.jpg'
 import SmartphoneIcon from '@mui/icons-material/Smartphone';
 import WatchIcon from '@mui/icons-material/Watch';
 import GasMeterIcon from '@mui/icons-material/GasMeter';
@@ -29,28 +34,27 @@ export const CarouselC = () => {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src={carouselImg}
+          src={isMobile? carouselMobileImg : carouselImg}
           alt="First slide"
-          height={isMobile ? '240px' : '620px'}
+          height={isMobile ? '350px' : '620px'}
         />
       </Carousel.Item>
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src={carouselImg}
+          src={isMobile? carouselMobileImg1 : carouselImg1}
           alt="Second slide"
-          height={isMobile ? '240px' : '620px'}
+          height={isMobile ? '350px' : '620px'}
         />
 
       </Carousel.Item>
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src={carouselImg}
+          src={isMobile? carouselMobileImg2 : carouselImg2}
           alt="Third slide"
-          height={isMobile ? '240px' : '620px'}
+          height={isMobile ? '350px' : '620px'}
         />
-
       </Carousel.Item>
     </Carousel>
     </div>

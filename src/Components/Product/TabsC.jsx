@@ -5,8 +5,27 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import {useParams} from 'react-router-dom'
+import { db } from '../../firebase'
+import { uid } from 'uid'
+import { set,ref, onValue } from 'firebase/database'
 
 export default function TabsC() {
+  const[item,setItem] = useState([])
+  const isMobile = window.innerWidth <= 500;
+
+  useEffect(() => {
+    onValue(ref(db), snapshot => {
+      setItem([])
+      const data = snapshot.val()
+      if(data !== null) {
+        Object.values(data).map((todo) => {
+          setItem(oldArray => [...oldArray,todo])
+        })
+      }
+    })
+  },[])
+
+  const{name} = useParams()
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -57,28 +76,13 @@ export default function TabsC() {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-  };
-
-  const[item,setItem] = useState(null)
-
-    useEffect(() => {
-        fetch('https://mocki.io/v1/c7b43f40-9263-409a-9d11-3f3c534a26e6')
-        .then(res => {
-            return res.json()
-        })
-        .then(data => {
-            setItem(data)
-        })
-    },[])
-
-    const{id} = useParams()
-    const Id = parseInt(id,10)
+  }
 
   return (
     <Box sx={{ width: '100%',marginTop:'5vh'}}>
       {item && item.map(item => 
       <>
-        {item.id === Id &&
+        {item.name === name &&
         <>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">

@@ -2,26 +2,29 @@ import React, {useEffect,useState} from 'react'
 import { useParams } from 'react-router-dom'
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import TableRowsIcon from '@mui/icons-material/TableRows';
-import { Container } from 'react-bootstrap';
+import { db } from '../../firebase'
+import { uid } from 'uid'
+import { set,ref, onValue } from 'firebase/database'
 
 export const HeaderSidebarC = () => {
+
+    const[item,setItem] = useState([])
     const isMobile = window.innerWidth <= 500;
 
-    const[item,setItem] = useState(null)
-
     useEffect(() => {
-        fetch('https://mocki.io/v1/10e98000-1168-408f-9a8b-f78600746c22')
-        .then(res => {
-            return res.json()
-        })
-        .then(data => {
-            setItem(data)
-        })
+      onValue(ref(db), snapshot => {
+        setItem([])
+        const data = snapshot.val()
+        if(data !== null) {
+          Object.values(data).map((todo) => {
+            setItem(oldArray => [...oldArray,todo])
+          })
+        }
+      })
     },[])
 
-    const{id} = useParams()
-    const Id = parseInt(id,10)
+
+    const{name} = useParams()
 
   return (
     <div>
@@ -29,7 +32,7 @@ export const HeaderSidebarC = () => {
             <HomeOutlinedIcon />
             {item && item.map(item => 
               <>
-              {item.id === Id &&
+              {item.name === name &&
                 <>
                   <ChevronRightIcon />
                   <p>{item.category}</p>

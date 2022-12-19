@@ -11,19 +11,19 @@ export const UnderCarouselC = () => {
     <div style={{paddingLeft:isMobile ? '2%' : '25%',paddingTop:'1vh',backgroundColor:'#ebebeb',paddingBottom:'1vh',display:'flex',overflow:'hidden'}}>
       <div style={{display:'flex',marginRight:'8vh'}}>
         <img alt='i1' src={Item1} width={isMobile? '60px' : '90px'} height={isMobile? '60px' : '90px'} style={{marginTop:isMobile? '3vh' : '0px'}} />
-        <p style={{marginTop:'3vh',fontWeight:'500',fontSize:'20px'}}>Aktuelni proizvodi</p>
+        <p style={{marginTop:'3.5vh',fontWeight:'500',fontSize:'18px',width:'17vh'}}>Aktuelni proizvodi</p>
       </div>
       <div style={{display:'flex',marginRight:'8vh'}}>
-        <ForwardToInboxIcon style={{fontSize:isMobile? "7vh" : "8vh",marginTop:isMobile? '20px' : '0px'}}/>
-        <p style={{marginTop:'3vh',fontWeight:'500',fontSize:'20px'}}>Aktuelni proizvodi</p>
+        <ForwardToInboxIcon style={{fontSize:isMobile? "7vh" : "8vh",marginTop:isMobile? '20px' : '10px'}}/>
+        <p style={{marginTop:'3.5vh',fontWeight:'500',fontSize:'18px',width:'17vh'}}>Korisnicka podrska</p>
       </div>
       <div style={{display:'flex',marginRight:'8vh'}}>
-        <LocalGroceryStoreIcon style={{fontSize:"8vh"}}/>
-        <p style={{marginTop:'3vh',fontWeight:'500',fontSize:'20px'}}>Aktuelni proizvodi</p>
+        <LocalGroceryStoreIcon style={{fontSize:"8vh",marginTop:isMobile? '20px' : '10px'}}/>
+        <p style={{marginTop:'3.5vh',fontWeight:'500',fontSize:'18px',width:'17vh'}}>Korpa zelja</p>
       </div>
       <div style={{display:'flex',marginRight:'8vh'}}>
-        <StoreMallDirectoryIcon style={{fontSize:"8vh"}}/>
-        <p style={{marginTop:'3vh',fontWeight:'500',fontSize:'20px'}}>Aktuelni proizvodi</p>
+        <StoreMallDirectoryIcon style={{fontSize:"8vh",marginTop:isMobile? '20px' : '10px'}}/>
+        <p style={{marginTop:'3.5vh',fontWeight:'500',fontSize:'18px',width:'17vh'}}>Registruj se</p>
       </div>
     </div>
   )
